@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Private Chat</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">✦</div>
+        <span>whisper<span class="accent">.</span></span>
+      </div>
+      <span class="online-label">
+        <span class="green-dot"></span> Private messaging
+      </span>
+    </header>
+
+    <section id="home" class="home">
+      <div class="hero">
+        <div class="eyebrow">YOUR SPACE. YOUR PEOPLE.</div>
+        <h1>Conversations<br>without the <span>crowd.</span></h1>
+        <p>Create a private room or join your friends with a room code. Only approved names can enter.</p>
+      </div>
+
+      <div class="panels">
+        <div class="panel">
+          <div class="panel-icon">✦</div>
+          <h2>Create a room</h2>
+          <p>Start your own private chat and choose who is allowed inside.</p>
+
+          <form id="createForm">
+            <label>Your name</label>
+            <input id="creatorName" maxlength="24" placeholder="Enter your name" required>
+
+            <label>Approved names</label>
+            <textarea id="allowedNames" placeholder="Alex&#10;Jordan&#10;Sam"></textarea>
+            <small>Put each approved name on a new line. Your name is automatically approved.</small>
+
+            <button type="submit">Create private room →</button>
+          </form>
+        </div>
+
+        <div class="panel">
+          <div class="panel-icon">↗</div>
+          <h2>Join a room</h2>
+          <p>Already have a code? Enter it below with your approved name.</p>
+
+          <form id="joinForm">
+            <label>Your name</label>
+            <input id="joinName" maxlength="24" placeholder="Enter your name" required>
+
+            <label>Room code</label>
+            <input id="roomCode" maxlength="6" placeholder="ABC123" required>
+
+            <button type="submit">Join conversation →</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="room" class="chat hidden">
+      <aside class="sidebar">
+        <div class="side-title">YOUR ROOM</div>
+        <div class="room-code-box">
+          <small>ROOM CODE</small>
+          <strong id="displayCode">------</strong>
+          <button id="copyCode" class="copy-btn">Copy code</button>
+        </div>
+
+        <div class="side-title people-title">IN THIS ROOM</div>
+        <div id="memberList"></div>
+
+        <div id="adminPanel" class="admin hidden">
+          <div class="side-title">CREATOR TOOLS</div>
+          <form id="addNameForm">
+            <input id="newAllowedName" maxlength="24" placeholder="New approved name">
+            <button type="submit">+ Allow name</button>
+          </form>
+        </div>
+
+        <button id="leaveBtn" class="leave-btn">← Leave room</button>
+      </aside>
+
+      <div class="chat-main">
+        <div class="chat-header">
+          <div>
+            <h2 id="chatTitle">Private conversation</h2>
+            <span><span class="green-dot"></span> Connected</span>
+          </div>
+          <div class="user-pill" id="myName"></div>
+        </div>
+
+        <div id="messages" class="messages">
+          <div class="welcome-message">
+            <h3>You're in.</h3>
+            <p>Say hello and start the conversation.</p>
+          </div>
+        </div>
+
+        <div id="replyPreview" class="reply-preview hidden">
+          <span id="replyText"></span>
+          <button id="cancelReply">×</button>
+        </div>
+
+        <form id="messageForm" class="message-form">
+          <input id="messageInput" maxlength="2000"
+            placeholder="Write a message..." autocomplete="off" required>
+          <button type="submit">Send ↑</button>
+        </form>
+        <div class="input-note">ENTER TO SEND · BE KIND TO EACH OTHER</div>
+      </div>
+    </section>
+
+    <div id="notice" class="notice hidden"></div>
+
+    <footer>WHISPER. &nbsp; PRIVATE CONVERSATIONS, YOUR WAY.</footer>
+  </main>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
