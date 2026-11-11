@@ -11,6 +11,10 @@ const io = new Server(server);
 app.use(express.json({ limit: "10kb" }));
 app.use(express.static(path.join(__dirname, "public")));
 
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
 const rooms = new Map();
 
 function makeCode() {
